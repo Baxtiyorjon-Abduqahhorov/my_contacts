@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:my_contacts/models/model_get_top_contacts.dart';
 
 class Api {
-  String host = "192.168.213.66:8080";
+  String host = "132.145.138.206:8080";
   Future<Map> register(String phone, String pasword, String firstname,
       String lastname, String bio, String picture) async {
     var request = http.MultipartRequest(
@@ -36,6 +36,23 @@ class Api {
     var request = http.MultipartRequest(
         'GET', Uri.parse('http://$host/api/auth/checkUser'));
     request.fields.addAll({'phone': phone});
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      return jsonDecode(await response.stream.bytesToString());
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> createPost(String token, String caption, String fileName) async {
+    var headers = {'Authorization': 'Bearer $token'};
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('http://$host/api/posts/create'));
+    request.fields.addAll({'caption': caption});
+    request.files.add(await http.MultipartFile.fromPath('picture', fileName));
+    request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
 

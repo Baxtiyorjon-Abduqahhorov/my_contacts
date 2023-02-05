@@ -42,8 +42,8 @@ class _ScreenLoginState extends State<ScreenLogin> {
           "number": phone,
         });
       }
-      log(Hive.box("boxToken").get("token"));
-      
+      //log(Hive.box("boxToken").get("token"));
+
       Api().saveContact(Hive.box("boxToken").get("token"), list);
       /*    Api().saveContact(
           "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIrOTk4OTAxNjMxNzE2IiwiaWF0IjoxNjc0OTc3NTQzLCJleHAiOjE2Nzc1Njk1NDN9.adj_L0ENG4laG_gSnE_LbpcXZgqXNd84vWBi6SgxUI8kiQtXzfj5QAo-92No2luZ9Cle0rq0cv55lJ2RazKA-A",
@@ -156,6 +156,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
             ),
             GestureDetector(
               onTap: () async {
+                log("ygygyg");
                 if (phoneField.text.isNotEmpty &&
                     passwordField.text.isNotEmpty &&
                     passwordField.text.length >= 8 &&

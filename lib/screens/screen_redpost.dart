@@ -47,9 +47,6 @@ class _ScreenRedpostState extends State<ScreenRedpost> {
     Api().syncContact(Hive.box("boxToken").get("token"), list);
   }
 
-  final ImagePicker imagePicker = ImagePicker();
-  XFile? xFile;
-
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> key = GlobalKey();
@@ -61,8 +58,7 @@ class _ScreenRedpostState extends State<ScreenRedpost> {
       resizeToAvoidBottomInset: false,
       floatingActionButton: InkWell(
         onTap: () async {
-          xFile = await imagePicker.pickImage(source: ImageSource.gallery);
-          Navigator.push(context, SlideTransitionBottom(ScreenNewPost(xfile: xFile,)));
+          Navigator.push(context, SlideTransitionBottom(ScreenNewPost()));
         },
         child: Container(
           decoration: const BoxDecoration(
